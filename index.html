@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f4ed">
+    <meta name="description" content="Find your next favorite coffeehouse drink, from cozy lattes to refreshing cold brew.">
+    <title>Daily Grind — Coffeehouse recipes</title>
+    <link rel="stylesheet" href="public/styles.css">
+    <script src="public/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="Daily Grind home">
+        <span class="brand-mark" aria-hidden="true">dg.</span>
+        <span class="brand-name">daily grind<span class="brand-period">.</span></span>
+      </a>
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="#recipes">The recipes</a>
+        <a href="#about">Our little ritual</a>
+      </nav>
+      <button class="button button-dark header-add" id="open-add" type="button">
+        <span aria-hidden="true">＋</span> Add a recipe
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> YOUR LITTLE CORNER CAFÉ</p>
+          <h1 id="hero-title">Good coffee.<br><em>Made your way.</em></h1>
+          <p class="hero-description">Your favorite coffeehouse drinks, made easy at home. Find a new ritual, or save one of your own.</p>
+          <a class="hero-link" href="#recipes">Find your next favorite <span aria-hidden="true">↘</span></a>
+        </div>
+        <div class="hero-art" aria-label="Illustration of a latte and coffee beans" role="img">
+          <div class="sun-shape"></div>
+          <div class="steam steam-one"></div>
+          <div class="steam steam-two"></div>
+          <div class="cup-shadow"></div>
+          <div class="coffee-cup"><div class="coffee-top"><span class="latte-heart">♥</span></div><div class="cup-body"></div><div class="cup-handle"></div></div>
+          <div class="coffee-bean bean-one"></div><div class="coffee-bean bean-two"></div><div class="coffee-bean bean-three"></div>
+          <span class="art-note">a slower<br>kind of morning</span>
+        </div>
+        <div class="hero-bottom-note"><span>EST. EVERY MORNING</span><span>✳ &nbsp; MADE WITH A LITTLE LOVE</span></div>
+      </section>
+
+      <section class="recipes-section" id="recipes" aria-labelledby="recipes-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">PICK YOUR POUR</p>
+            <h2 id="recipes-title">The recipe <em>book.</em></h2>
+          </div>
+          <p class="recipe-count" id="recipe-count" aria-live="polite"></p>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-box">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <span class="visually-hidden">Search recipes</span>
+            <input id="search-input" type="search" placeholder="Find your next favorite…" autocomplete="off">
+            <kbd>Ctrl K</kbd>
+          </label>
+          <div class="filter-list" id="filters" aria-label="Filter recipes by type">
+            <button class="filter-chip active" data-category="" type="button" aria-pressed="true">All recipes</button>
+            <button class="filter-chip" data-category="Espresso" type="button" aria-pressed="false">Espresso</button>
+            <button class="filter-chip" data-category="Iced" type="button" aria-pressed="false">Iced</button>
+            <button class="filter-chip" data-category="Cold" type="button" aria-pressed="false">Cold brew</button>
+            <button class="filter-chip" data-category="Tea" type="button" aria-pressed="false">Tea & more</button>
+            <button class="filter-chip" data-category="Treats" type="button" aria-pressed="false">Treats</button>
+          </div>
+        </div>
+
+        <p class="status-message" id="status-message" role="status"></p>
+        <div class="recipe-grid" id="recipe-grid" aria-live="polite"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          <span aria-hidden="true">☕</span>
+          <h3>No cups found.</h3>
+          <p>Try a different search, or switch up your filters.</p>
+          <button class="text-button" id="clear-filters" type="button">Clear your filters</button>
+        </div>
+      </section>
+
+      <section class="quote-section" id="about">
+        <span class="quote-mark" aria-hidden="true">“</span>
+        <blockquote>Life's too short for coffee you don't love.</blockquote>
+        <p>A LITTLE REMINDER FROM YOUR HOME CAFÉ</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="./index.html"><span class="brand-mark" aria-hidden="true">dg.</span><span class="brand-name">daily grind<span class="brand-period">.</span></span></a>
+      <p>Made for slow sips & good mornings.</p>
+      <a href="#recipes">Back to the good stuff ↑</a>
+    </footer>
+
+    <dialog class="recipe-dialog" id="recipe-dialog" aria-labelledby="dialog-title">
+      <button class="dialog-close" type="button" data-close-dialog aria-label="Close">×</button>
+      <div id="recipe-details"></div>
+    </dialog>
+
+    <dialog class="recipe-dialog add-dialog" id="add-dialog" aria-labelledby="add-title">
+      <button class="dialog-close" type="button" data-close-dialog aria-label="Close">×</button>
+      <p class="eyebrow">A LITTLE SOMETHING OF YOUR OWN</p>
+      <h2 id="add-title">Add your <em>recipe.</em></h2>
+      <p class="form-intro">Share a favorite with your home café community.</p>
+      <form id="recipe-form">
+        <label class="form-field">Recipe name<input name="name" required maxlength="100" placeholder="e.g. Maple oat latte"></label>
+        <div class="form-row">
+          <label class="form-field">Category<select name="category" required>
+            <option value="Espresso">Espresso</option><option value="Iced">Iced</option><option value="Cold">Cold brew</option><option value="Tea">Tea & more</option><option value="Treats">Treats</option>
+          </select></label>
+          <label class="form-field">Prep time (min)<input name="prepMinutes" type="number" min="1" max="1440" value="5" required></label>
+        </div>
+        <label class="form-field">A short description<textarea name="description" required maxlength="280" rows="2" placeholder="What makes this cup special?"></textarea></label>
+        <label class="form-field">Ingredients <span class="field-hint">one per line</span><textarea name="ingredients" required rows="4" placeholder="2 shots espresso&#10;¾ cup oat milk&#10;1 tsp maple syrup"></textarea></label>
+        <label class="form-field">Steps <span class="field-hint">one per line</span><textarea name="instructions" required rows="4" placeholder="Pull the espresso.&#10;Steam the milk.&#10;Pour, sip, enjoy."></textarea></label>
+        <p class="form-error" id="form-error" role="alert"></p>
+        <button class="button button-dark submit-button" type="submit">Save to the recipe book <span aria-hidden="true">↗</span></button>
+      </form>
+    </dialog>
+
+    <script>
+      document.addEventListener("keydown", (event) => {
+        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+          event.preventDefault();
+          document.getElementById("search-input").focus();
+        }
+      });
+    </script>
+  </body>
+</html>
